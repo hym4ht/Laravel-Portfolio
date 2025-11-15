@@ -1,0 +1,171 @@
+@import 'tailwindcss';
+
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+@theme {  --color-biru: #0099FF;  --color-tahiti: #3ab7bf;  --color-bermuda: #78dcca;}
+
+
+  @layer utilities {                                                          
+    .font-persona5 {                                                         
+
+         font-family: 'persona5', sans-serif;                                     
+     
+   }      
+   .font-persona5v2 {                                                         
+
+         font-family: 'persona5v2', sans-serif;                                     
+     
+   }
+   .font-alphazet {
+        font-family: 'Alphazet', sans-serif;
+   }
+  }
+                                                                                  
+                                                                                  
+ 
+
+@font-face {
+    font-family: 'persona5';
+    src: url('../fonts/Persona5MenuFontPrototype-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'persona5v2';
+    src: url('../fonts/personav2.ttf') format('truetype');
+     font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Alphazet';
+    src: url('../fonts/Alphazet-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Alphazet';
+    src: url('../fonts/Alphazet-SemiBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+
+
+/* resources/css/app.css atau file kustom lain */
+
+.link-wrapper {
+    /* Menentukan titik transformasi untuk rotasi */
+    transform-origin: center; 
+    z-index: 10; /* Z-index awal */
+}
+
+/* -------------------------------------------
+   HOVER TRANSFORMS MENGGUNAKAN TAILWIND UTILITY 
+   --------------------------------------My Po----- */
+
+/* Efek Hover Umum: Rotasi -6deg dan Z-index tinggi */
+.link-wrapper:hover {
+    z-index: 9999;
+    /* Kita gunakan kelas di Blade: group-hover:block pada .shape-wrapper */
+}
+
+/* Efek Shape Wrapper (Filter & Rotasi -6deg) */
+.link-wrapper .shape-wrapper {
+    filter: sepia(50%) saturate(3);
+    /* Rotasi standar, akan di-override oleh :nth-child(even) */
+    transform: rotate(0deg); 
+    transition: transform 0.1s linear;
+}
+
+.link-wrapper:hover .shape-wrapper {
+    /* Rotasi standar, diatur pada :hover */
+    transform: rotate(-6deg);
+}
+
+/* Efek Hover Ganjil (Odd Links): Rotasi -6deg (default) */
+/* Efek Hover Genap (Even Links): Rotasi +11deg */
+.link-wrapper.even-link:hover .shape-wrapper {
+    transform: rotate(11deg);
+}
+
+
+/* -------------------------------------------
+   ANIMASI JELLY & BOUNCE (WAJIB CSS KUSTOM)
+   ------------------------------------------- */
+
+.link-wrapper:hover {
+    /* Teks berubah menjadi merah saat hover (dari kode Blade) */
+    color: #dc2626; 
+    
+    /* Teks mengalami efek tilt/bounce: digeser sedikit ke atas dan dirotasi */
+    animation: tiltBounceText .15s ease forwards; 
+}
+.link-wrapper.even-link:hover {
+    /* Teks untuk link genap mengalami tilt/bounce yang berbeda */
+    animation: tiltBounceAltText .15s ease forwards; 
+}
+
+/* Gaya Shape Jelly */
+.shape-wrapper .shape {
+    transition: all .1s linear;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.shape-wrapper .shape.cyan-fill {
+    mix-blend-mode: screen;
+    animation-delay: 0.05s;
+    animation-duration: .4s;
+}
+
+.shape-wrapper .shape.red-fill {
+    animation-duration: .45s;
+    animation-delay: 0.08s;
+    opacity: .8;
+}
+
+/* Efek JELLY (Diambil langsung dari CSS awal) */
+.jelly {
+    animation-name: jelly;
+    transform-origin: center;
+}
+
+.link-wrapper:hover .shape-wrapper .shape.cyan-fill {
+    /* Meniru .shape.cyan-fill { transform: scale(3,.1); } pada :hover */
+    transform: scale(3, .1);
+}
+
+/* -------------------------------------------
+   KEYFRAMES (WAJIB DITULIS)
+   ------------------------------------------- */
+
+/* Keyframes untuk teks (menggantikan tiltBounce/tiltBounceAlt pada img-wrapper) */
+@keyframes tiltBounceText {
+    0% { transform: scale(1) rotate(-7deg); }
+    50% { transform: scale(1.1) rotate(-7deg); }
+    100% { transform: scale(1.05) rotate(-7deg); }
+}
+
+@keyframes tiltBounceAltText {
+    0% { transform: scale(1) rotate(7deg); }
+    50% { transform: scale(1.1) rotate(7deg); }
+    100% { transform: scale(1.05) rotate(7deg); }
+}
+
+/* Keyframes JELLY (Diambil langsung dari CSS awal) */
+@keyframes jelly {
+    0% { width: 100%; transform: scale(1.25,1) skewX(20deg) translateY(3px) rotateX(40deg) rotateY(10deg) rotateZ(-10deg); }
+    50% { width: 100%; transform: scale(1.25,1.1) skewX(-15deg) translateY(-2px) translateZ(-30px); }
+    100% { width: 100%; transform: scale(1.25,1) skewX(20deg) translateY(3px) rotateX(-40deg) rotateY(-10deg) rotateZ(-15deg); }
+}
+
+.link-wrapper.active {
+    color: white; /* Changed from #dc2626 to white */
+    transform: scale(1.05);
+}

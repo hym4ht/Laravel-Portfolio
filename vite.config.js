@@ -14,4 +14,8 @@ export default defineConfig({
         react(),
         tailwindcss(),
     ],
+      build: {
+    chunkSizeWarningLimit: 21500, // Atur batas peringatan menjadi 1000 kB
+  },
+ 
 });

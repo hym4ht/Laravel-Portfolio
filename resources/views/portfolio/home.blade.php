@@ -1,10 +1,19 @@
 <x-layout.app>
+{{-- Container untuk background --}}
+<div id="liquid-ether-background" class="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"></div>
+
 <style>
     /* --- CSS Khusus Animasi & Perhitungan Posisi Orbit (TIDAK BISA MURNI TAILWIND) --- */
 
     html,
     body {
         overflow-x: hidden;
+    }
+    
+    /* Pastikan konten utama punya z-index lebih tinggi jika perlu */
+    .main-content {
+        position: relative;
+        z-index: 1;
     }
 
     /* --- Animasi Muncul (Fade In/Slide Up) --- */
@@ -55,6 +64,13 @@
         object-fit: contain; 
     }
 
+    /* --- Posisi Default untuk Mobile (di bawah 1024px) --- */
+    .image-1 { top: -30px; left: calc(50% - 30px); }
+    .image-2 { top: 30px; right: -30px; }
+    .image-3 { bottom: 30px; right: -30px; }
+    .image-5 { bottom: 30px; left: -30px; }
+    .image-6 { top: 30px; left: -30px; }
+
     /* -------------------------------------------------------------------------------- */
     /* --- KODE SPEECH BUBBLE --- */
     /* -------------------------------------------------------------------------------- */
@@ -88,7 +104,7 @@
     .orbit-image::before {
         content: "";
         position: absolute;
-        top: -5px; 
+        top: -5px; DELETED-LINE
         left: 50%;
         transform: translateX(-50%) rotate(45deg); /* Menjaga arrow tetap di tengah saat zoomIdle */
         width: 8px;
@@ -129,10 +145,11 @@
             width: 128px;
         }
 
-        .lg-large .image-1 { top: -64px; left: 192px; }
-        .lg-large .image-2 { top: 64px; left: 448px; }
-        .lg-large .image-3 { top: 320px; left: 448px; }
-        .lg-large .image-5 { top: 320px; left: -64px; }
+        /* Menggunakan nilai yang lebih konsisten & mudah dibaca */
+        .lg-large .image-1 { top: -64px; left: calc(50% - 64px); }
+        .lg-large .image-2 { top: 64px; right: -64px; left: auto; } /* Reset left */
+        .lg-large .image-3 { bottom: 64px; right: -64px; top: auto; left: auto; } /* Reset top/left */
+        .lg-large .image-5 { bottom: 64px; left: -64px; top: auto; } /* Reset top */
         .lg-large .image-6 { top: 64px; left: -64px; }
     }
 </style>
@@ -142,11 +159,16 @@
         if (prefersDark) {
             document.documentElement.classList.add('dark');
         }
+
+        // Render komponen React setelah DOM siap
+        if (typeof window.renderReactComponent === 'function') {
+            window.renderReactComponent('LiquidEther', 'liquid-ether-background');
+        }
     });
 </script>
 
-<div class="container mx-auto px-8 py-20">
-    <div class="flex flex-col lg:flex-row items-center p-8 md:p-12 rounded-xl transition-colors duration-500 max-w-7xl mx-auto gap-x-40 ">
+<div class="main-content container mx-auto px-8 py-20">
+    <div class="flex flex-col lg:flex-row items-center p-8 md:p-12 rounded-xl transition-colors duration-500 max-w-7xl mx-auto gap-x-40">
         <div class="lg:w-3/5 flex justify-center relative lg:mr-auto">
 
             <div class="orbit-container lg-large">
@@ -194,11 +216,6 @@
                 A passionate web developer with expertise in creating modern and responsive web applications. I love to learn new technologies and build amazing things.
             </p>
 
-            <div class="mt-12 fade-in-up" style=" animation-delay: 2s;">
-                <a href="#contact" class="animate-bounce inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-4 px-10 rounded-full shadow-lg transition duration-300">
-                    Contact Me
-                </a>
-            </div>
         </div>
 
     </div>

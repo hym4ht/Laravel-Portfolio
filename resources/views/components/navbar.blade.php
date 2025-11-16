@@ -1,7 +1,7 @@
-<div class="sticky top-0 z-10 block w-full max-w-full rounded-none py-2 px-4 text-white backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
+<div class="block w-full max-w-full rounded-none py-2 px-4 text-white backdrop-blur-2xl text-lg backdrop-saturate-200 lg:px-8 lg:py-4">
     <div class="flex items-center justify-between text-blue-gray-900 mx-auto max-w-screen-xl">
         
-        <a href="{{ route('portfolio.home') }}" class="mr-4 cursor-pointer py-1.5 font-sans text-lg font-bold leading-relaxed tracking-normal text-white">
+        <a href="{{ route('portfolio.home') }}" class="mr-4 cursor-pointer py-1.5 font-sans font-bold leading-relaxed tracking-normal text-white">
          My Portfolio
         </a>
 
@@ -31,6 +31,7 @@
         </div>
 
         <button
+            id="hamburger-button"
             class="ml-auto h-6 w-6 text-inherit lg:hidden text-white"
         >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" class="h-6 w-6">
@@ -39,7 +40,7 @@
         </button>
     </div>
     
-    <div class="lg:hidden hidden"> 
+    <div id="mobile-menu" class="lg:hidden hidden"> 
         <ul class="my-2 flex flex-col gap-2">
             <li class="p-1 font-medium text-white">
                 <a href="{{ route('portfolio.about') }}" class="flex items-center transition-colors {{ request()->routeIs('portfolio.about') ? 'text-blue-500' : 'text-white' }}">
@@ -64,3 +65,16 @@
         </ul>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const hamburgerButton = document.getElementById('hamburger-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (hamburgerButton && mobileMenu) {
+            hamburgerButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    });
+</script>

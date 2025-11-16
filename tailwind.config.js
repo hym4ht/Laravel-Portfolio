@@ -10,6 +10,7 @@ module.exports = {
     './resources/**/*.js',
     './resources/**/*.jsx',
     './resources/**/*.vue',
+    './resources/js/components/SkillsSlider.jsx',
   ],
   theme: {
     extend: {
@@ -20,5 +21,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tw-animate-css'),
+  ],
 };

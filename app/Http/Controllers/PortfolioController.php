@@ -33,6 +33,15 @@ class PortfolioController extends Controller
         return view('portfolio.projects');
     }
 
+    public function post()
+    {
+        $posts = \App\Models\Post::whereNotNull('published_at')
+            ->orderBy('published_at', 'desc')
+            ->paginate(9);
+
+        return view('portfolio.post', compact('posts'));
+    }
+
     public function contact()
     {
      

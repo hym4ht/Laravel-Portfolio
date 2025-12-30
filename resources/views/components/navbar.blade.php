@@ -23,6 +23,11 @@
                     </a>
                 </li>
                 <li class="p-1 font-medium text-white">
+                    <a href="{{ route('portfolio.post') }}" class="flex items-center transition-colors {{ request()->routeIs('portfolio.post') ? 'text-blue-500' : 'text-white' }}">
+                      Post
+                    </a>
+                </li>
+                <li class="p-1 font-medium text-white">
                     <a href="{{ route('portfolio.contact') }}" class="flex items-center transition-colors {{ request()->routeIs('portfolio.contact') ? 'text-blue-500' : 'text-white' }}">
                       Contact
                     </a>
@@ -55,6 +60,11 @@
             <li class="p-1 font-medium text-white">
                 <a href="{{ route('portfolio.projects') }}" class="flex items-center transition-colors {{ request()->routeIs('portfolio.projects') ? 'text-blue-500' : 'text-white' }}">
                   Portfolio
+                </a>
+            </li>
+            <li class="p-1 font-medium text-white">
+                <a href="{{ route('portfolio.post') }}" class="flex items-center transition-colors {{ request()->routeIs('portfolio.post') ? 'text-blue-500' : 'text-white' }}">
+                  Post
                 </a>
             </li>
             <li class="p-1 font-medium text-white">

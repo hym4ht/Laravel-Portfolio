@@ -43,6 +43,15 @@ return [
             'transaction_mode' => 'DEFERRED',
         ],
 
+        'libsql' => [
+            'driver' => 'libsql',
+            'url' => env('TURSO_DATABASE_URL'),
+            'authToken' => env('TURSO_AUTH_TOKEN'),
+            'database' => env('DB_DATABASE', 'laravel'),
+            'prefix' => '',
+            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+        ],
+
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DB_URL'),

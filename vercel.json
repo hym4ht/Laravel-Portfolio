@@ -3,14 +3,14 @@
     "functions": {
         "api/index.php": {
             "runtime": "vercel-php@0.7.1",
-            "excludeFiles": "{node_modules,tests,storage/logs,public/assets/large-files}/**"
+            "includeFiles": "{app,config,database,public,resources,routes,vendor,bootstrap,storage/framework/views}/**",
+            "excludeFiles": "{node_modules,tests,storage/logs,.git}/**"
         }
     },
     "routes": [
         {
             "src": "/(.*)",
             "dest": "/api/index.php"
-            
         }
     ],
     "env": {
@@ -18,6 +18,8 @@
         "APP_DEBUG": "false",
         "APP_URL": "https://nama-proyek-kamu.vercel.app",
         "DB_CONNECTION": "libsql",
+        "DB_URL": "@DB_URL",
+        "DB_AUTH_TOKEN": "@DB_AUTH_TOKEN",
         "VIEW_COMPILED_PATH": "/tmp",
         "CACHE_DRIVER": "array",
         "SESSION_DRIVER": "cookie",
